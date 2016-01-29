@@ -4,7 +4,7 @@ services:
 
 install:
   - bundle install
-  - pip install -r test-requirements.txt
+  - sudo pip install -r test-requirements.txt
   - gitshelf install
 
 script:
