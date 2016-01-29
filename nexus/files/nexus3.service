@@ -1,0 +1,11 @@
+[Unit]
+Description=Sonatype Nexus
+Wants=network-online.target
+
+[Service]
+ExecStart={{ config.symlink }}/bin/nexus run
+Environment="JAVA_HOME={{ config.java_home }}"
+User={{ config.user }}
+
+[Install]
+WantedBy=multi-user.target

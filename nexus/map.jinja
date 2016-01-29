@@ -1,0 +1,30 @@
+{% import_yaml 'nexus/defaults.yaml' as default_settings %}
+{% set nexus = salt['pillar.get']('nexus', default=default_settings.get('nexus'), merge=True) %}
+
+{% do nexus.update({
+  'is_nexus3': nexus.version[0:1] == '3',
+  'workdir': nexus.get('workdir', nexus.directory + '/sonatype-work')
+}) %}
+
+{% if nexus.is_nexus3 %}
+{% do nexus.update({
+  'source': nexus.get('source', 'http://download.sonatype.com/nexus/3/nexus-' + nexus.version + '-unix.tar.gz'),
+  'source_hash': nexus.get('source_hash', 'http://download.sonatype.com/nexus/3/nexus-' + nexus.version + '-unix.tar.gz.md5'),
+  'install': nexus.directory + '/nexus-' + nexus.build,
+  'vmoptions': {
+    'karaf.data': nexus.workdir,
+    'karaf.instances': nexus.workdir + "/instances",
+    'java.io.tmpdir': nexus.workdir + "/tmp"
+  }
+}) %}
+{% else %}
+{% do nexus.update({
+  'source': nexus.get('source', 'http://www.sonatype.org/downloads/nexus-' + nexus.version + '-bundle.tar.gz'),
+  'source_hash': nexus.get('source_hash', 'http://www.sonatype.org/downloads/nexus-' + nexus.version + '-bundle.tar.gz.md5'),
+  'install': nexus.directory + '/nexus-' + nexus.version,
+  'piddir': nexus.workdir + '/pid',
+  'logdir': nexus.symlink + '/logs',
+  'tmpdir': nexus.symlink + '/tmp',
+  'datadir': nexus.symlink + '/data'
+}) %}
+{% endif %}

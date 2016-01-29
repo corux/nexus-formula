@@ -1,0 +1,14 @@
+[Unit]
+Description=Sonatype Nexus
+Wants=network-online.target
+
+[Service]
+ExecStart={{ config.symlink }}/bin/nexus start
+ExecStop={{ config.symlink }}/bin/nexus stop
+Type=forking
+Environment="PIDDIR={{ config.piddir }}"
+PIDFile={{ config.piddir }}/nexus.pid
+User={{ config.user }}
+
+[Install]
+WantedBy=multi-user.target

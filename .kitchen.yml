@@ -1,0 +1,31 @@
+# <% load "#{File.dirname(__FILE__)}/test/kitchen_docker.rb" %>
+---
+driver:
+  name: docker
+
+platforms:
+  - name: centos-7
+    driver_config:
+      image: nexus.corux.de:18443/corux/centos7-salt
+      cap_add:
+        - SYS_ADMIN
+      run_command: /usr/sbin/init
+
+provisioner:
+  name: salt_solo
+  formula: nexus
+  vendor_path: srv/salt
+  pillars-from-files:
+    nexus.sls: pillar.example
+  pillars:
+    top.sls:
+      base:
+        "*":
+          - nexus
+  state_top:
+    base:
+      "*":
+        - nexus
+
+suites:
+  - name: default
