@@ -6,7 +6,7 @@ driver:
 platforms:
   - name: centos-7
     driver_config:
-      image: nexus.corux.de:18443/corux/centos7-salt
+      image: corux/centos7-salt
       cap_add:
         - SYS_ADMIN
       run_command: /usr/sbin/init
