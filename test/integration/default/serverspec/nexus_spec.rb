@@ -7,8 +7,8 @@ describe service("nexus") do
   it { should be_running }
 end
 
-describe port("8081") do
-  it { should be_listening }
+describe host("localhost") do
+  it { should be_reachable.with( :port => 8081, :timeout => 10 ) }
 end
 
 describe command("curl -L localhost:8081") do
