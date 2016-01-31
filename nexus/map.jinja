@@ -1,9 +1,11 @@
 {% import_yaml 'nexus/defaults.yaml' as default_settings %}
 {% set nexus = salt['pillar.get']('nexus', default=default_settings.get('nexus'), merge=True) %}
+{% from 'java/map.jinja' import java with context %}
 
 {% do nexus.update({
   'is_nexus3': nexus.version[0:1] == '3',
-  'workdir': nexus.get('workdir', nexus.directory + '/sonatype-work')
+  'workdir': nexus.get('workdir', nexus.directory + '/sonatype-work'),
+  'java_home': nexus.get('java_home', java.jre8.home)
 }) %}
 
 {% if nexus.is_nexus3 %}

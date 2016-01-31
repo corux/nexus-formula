@@ -1,8 +1,4 @@
 {%- from 'nexus/map.jinja' import nexus with context %}
 
 include:
-{%- if nexus.is_nexus3 %}
-  - .nexus3
-{%- else %}
-  - .nexus2
-{%- endif %}
+  - .nexus{{ 3 if nexus.is_nexus3 else 2 }}
