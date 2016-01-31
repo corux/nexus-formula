@@ -1,5 +1,3 @@
-# <% load "#{File.dirname(__FILE__)}/test/kitchen_docker.rb" %>
----
 driver:
   name: docker
 
