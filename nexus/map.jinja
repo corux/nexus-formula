@@ -12,7 +12,7 @@
 {% do nexus.update({
   'source': nexus.get('source', 'http://download.sonatype.com/nexus/3/nexus-' + nexus.version + '-unix.tar.gz'),
   'source_hash': nexus.get('source_hash', 'http://download.sonatype.com/nexus/3/nexus-' + nexus.version + '-unix.tar.gz.md5'),
-  'install': nexus.directory + '/nexus-' + nexus.build,
+  'install': nexus.directory + '/nexus-' + nexus.version,
   'vmoptions': {
     'karaf.data': nexus.workdir,
     'karaf.instances': nexus.workdir + "/instances",
