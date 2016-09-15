@@ -1,5 +1,5 @@
 nexus:
-  version: 3.0.1-01
+  version: 3.0.2-02
   user: nexus
   group: nexus
   directory: /opt/nexus
