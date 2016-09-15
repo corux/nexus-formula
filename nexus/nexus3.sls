@@ -74,6 +74,16 @@ nexus-install:
     - watch_in:
       - service: nexus
 
+nexus-upgrade-clean-cache:
+  file.managed:
+    - name: {{ nexus.workdir }}/clean_cache
+    - user: {{ nexus.user }}
+    - group: {{ nexus.group }}
+    - require:
+      - file: nexus-workdir
+    - onchanges:
+      - archive: nexus-install
+
 nexus-workdir:
   file.directory:
     - name: {{ nexus.workdir }}
