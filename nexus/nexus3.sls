@@ -57,9 +57,6 @@ nexus-install:
     - source_hash: {{ nexus.source_hash }}
     - archive_format: tar
     - if_missing: {{ nexus.install }}
-    - tar_options: z
-    - user: root
-    - group: root
     - keep: True
     - require:
       - file: nexus-dir
