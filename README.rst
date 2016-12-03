@@ -21,9 +21,9 @@ Meta state, which includes ``nexus.nexus2`` or ``nexus.nexus3``, depending on th
 ``nexus.nexus2``
 ----------------
 
-Installs the Nexus 2 server (stable).
+Installs the Nexus 2 server.
 
 ``nexus.nexus3``
 ----------------
 
-Installs the Nexus 3.0 server (technology preview).
+Installs the Nexus 3 server.
